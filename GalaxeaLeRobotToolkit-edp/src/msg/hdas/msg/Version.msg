@@ -1,0 +1,4 @@
+std_msgs/Header header
+string hardware_version
+string software_version
+string control_mode
