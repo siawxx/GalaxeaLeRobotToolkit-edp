@@ -1086,18 +1086,20 @@ def get_raw_data_meta_from_args():
     return (raw_data_meta_json, output_dir)
 
 def upload(self, ):
-   if self.use_compression:
-       def add_to_tar(tar,file_path):
-           tar.add(file_path,arcname=os.path.basename(file_path))
-           files=[os.path.join(self.output_dir,self.dataset_name),os.path.join(self.output_dir,"training_data_set_meta.json")]
-           output_tar=os.path.join(self.output_dir,f"{self.dataset_name}.tar.gz")
-           with tarfile.open(output_tar,"w:gz") as tar:
-               for file in files:
-                   try:
-                       add_to_tar(tar,file)
-                   except Exception as e:
-                       print(f"Error adding {file} to tar:{e}")
-                       shutil.move(output_tar,self.output_dir)
+        if self.use_compression:
+            def add_to_tar(tar, file_path):
+                tar.add(file_path, arcname=os.path.basename(file_path))
+            files = [os.path.join(self.output_dir, self.dataset_name), 
+                    os.path.join(self.output_dir, "training_data_set_meta.json")]
+            output_tar = os.path.join(self.output_dir, f"{self.dataset_name}.tar.gz")
+            with tarfile.open(output_tar, "w:gz") as tar:
+                for file in files:
+                    try:
+                        add_to_tar(tar, file)
+                    except Exception as e:
+                        print(f"Error adding {file} to tar: {e}")
+            shutil.move(output_tar, self.output_dir)
+
 
 def format_shelf_string(s):
     parts = s.split('_')
