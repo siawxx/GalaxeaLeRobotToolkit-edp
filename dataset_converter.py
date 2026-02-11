@@ -1146,5 +1146,7 @@ if __name__ == '__main__':
     # 2. process messages.
     data_converter.process_all(mcaps_dict)
 
+    data_converter.upload()
+
     if not USE_ROS1:    
         rclpy.shutdown()
